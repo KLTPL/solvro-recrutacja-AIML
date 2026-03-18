@@ -4,7 +4,7 @@ Projekt rekrutacyjny do koła naukowego. Aplikacja CLI służąca do automatyczn
 
 ## O projekcie
 
-Obecnie projekt znajduje się w fazie Proof of Concept (PoC). Skrypt wczytuje przykładowy abstrakt pracy inżynierskiej z pliku, wysyła go do modelu OpenAI (gpt-4o-mini) i zwraca podsumowanie w terminalu.
+Obecnie projekt znajduje się w fazie Minimum Viable Product (MVP). Aplikacja przyjmuje ścieżkę do pliku tekstowego jako argument z poziomu terminala, wysyła go do modelu OpenAI (gpt-4o-mini) i zwraca podsumowanie w terminalu.
 
 ## Uruchomienie lokalne
 
@@ -37,5 +37,11 @@ Obecnie projekt znajduje się w fazie Proof of Concept (PoC). Skrypt wczytuje pr
 6. Uruchom skrypt:
 
    ```bash
-   python main.py
+   python main.py samples/input_file.txt
+   ```
+
+Aby zobaczyć panel pomocy, wpisz:
+
+   ```bash
+   python main.py -h
    ```
