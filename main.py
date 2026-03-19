@@ -42,7 +42,8 @@ def main():
     file_content = read_file(args.filepath)
 
     if file_content:
-        print(file_content)
+        summary = summarize_text(file_content)
+        print(summary)
 
 
 if __name__ == "__main__":
