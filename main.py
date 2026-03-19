@@ -14,7 +14,13 @@ def parse_args():
     parser.add_argument(
         "filepath", type=str, help="Ścieżka do pliku .txt który chcesz streścić"
     )
-
+    parser.add_argument(
+        "-o",
+        "--output",
+        type=str,
+        default="summary.md",
+        help="Ścieżka do pliku .md z wynikiem",
+    )
     return parser.parse_args()
 
 
@@ -25,6 +31,15 @@ def read_file(file_path):
     except FileNotFoundError:
         print(f"Plik nie znaleziony {file_path}")
         return None
+
+
+def save_to_file(content, file_path):
+    try:
+        with open(file_path, "w", encoding="utf-8") as file:
+            file.write(content)
+        print(f"Zapisano podsumowanie do pliku {file_path}")
+    except Exception as e:
+        print(f"Nie udało się zapisać do pliku. Błąd: {e}")
 
 
 def summarize_text(file_content):
@@ -69,7 +84,11 @@ def main():
     if file_content:
         summary = summarize_text(file_content)
 
+        print("---ODPOWIEDŹ AI---")
         print(summary)
+        print("-------------")
+
+        save_to_file(summary, args.output)
 
 
 if __name__ == "__main__":
