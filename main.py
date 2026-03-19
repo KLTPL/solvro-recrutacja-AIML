@@ -28,10 +28,35 @@ def read_file(file_path):
 
 
 def summarize_text(file_content):
+    SYSTEM_PROMPT = """Jesteś doświadczonym asystentem naukowym pracującym na politechnice.
+Twoim zadaniem jest analiza abstraktów artykułów naukowych i wyciąganie z nich kluczowych informacji.
+
+Zwróć wynik w czystym formacie Markdown, używając DOKŁADNIE poniższej struktury:
+
+## Główny problem badawczy
+(Opisz w 1-2 zdaniach, jaki problem rozwiązują autorzy)
+
+## Zaproponowana metoda
+(Wymień w krótkich punktach użyte technologie/metody)
+
+## Najważniejsze wyniki
+(Wymień w punktach główne osiągnięcia i metryki, jeśli są podane)
+
+## Ograniczenia
+(Jeśli autorzy wspominają o wadach/ograniczeniach, opisz je. Jeśli nie, napisz "Brak danych")
+
+ZASADY:
+1. Pisz zwięźle, akademickim stylem.
+2. Zwróć TYLKO kod Markdown. Nie dodawaj żadnych wstępów (np. "Oto podsumowanie") ani zakończeń.
+3. Opieraj się WYŁĄCZNIE na dostarczonym tekście. Nie zmyślaj informacji (zero halucynacji)."""
     print("Czytanie i analizowanie pliku")
     res = client.chat.completions.create(
         model="gpt-4o-mini",
-        messages=[{"role": "user", "content": f"Podsumuj to: {file_content}"}],
+        messages=[
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": file_content},
+        ],
+        temperature=0.2,
     )
     return res.choices[0].message.content
 
@@ -43,6 +68,7 @@ def main():
 
     if file_content:
         summary = summarize_text(file_content)
+
         print(summary)
 
 
