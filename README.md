@@ -1,10 +1,10 @@
 # Asystent Notatek Naukowych (KN Solvro rekrutacja do AI/ML)
 
-Projekt rekrutacyjny do koła naukowego. Aplikacja CLI służąca do automatycznego streszczania artykułów naukowych przy użyciu LLM.
+Projekt rekrutacyjny do koła naukowego Solvro. Aplikacja CLI służąca do automatycznego streszczania artykułów naukowych przy użyciu LLM.
 
 ## O projekcie
 
-Obecnie projekt znajduje się w fazie Minimum Viable Product (MVP). Aplikacja przyjmuje ścieżkę do pliku tekstowego jako argument z poziomu terminala, wysyła go do modelu OpenAI (gpt-4o-mini) i zwraca podsumowanie w terminalu.
+Obecnie projekt znajduje się w fazie Minimum Viable Product (MVP). Aplikacja przyjmuje ścieżkę do pliku tekstowego jako argument z poziomu terminala, wykorzystuje *Context Engineering* do precyzyjnego instruowania modelu OpenAI (gpt-4o-mini) i zapisuje wynik w postaci podsumowania podzielonego na sekcje (problem, metody, wyniki, ograniczenia) do pliku wskazanego przy wywołaniu.
 
 ## Uruchomienie lokalne
 
@@ -36,12 +36,27 @@ Obecnie projekt znajduje się w fazie Minimum Viable Product (MVP). Aplikacja pr
 
 6. Uruchom skrypt:
 
+    **Podstawowe użycie** (zapisze wynik w domyślnym pliku `wynik.md`):
+
    ```bash
    python main.py samples/input_file.txt
    ```
 
-Aby zobaczyć panel pomocy, wpisz:
+   **Zapis do konkretnego pliku** (użyj flagi `-o` lub `--output`):
+
+   ```bash
+   python main.py samples/input_file.txt -o moja_notatka.md
+   ```
+
+   Aby zobaczyć panel pomocy, wpisz:
 
    ```bash
    python main.py -h
    ```
+
+## Trade-offy
+
+- **Brak obsługi PDF:** Obecnie MVP przyjmuje tylko czysty tekst (`.txt`).
+- **Brak chunkingu:** Skrypt wysyła cały tekst naraz. Przy bardzo długich artykułach API odrzuci zapytanie.
+- **Halucynacje modelu:** Mimo ustawienia niskiej temperatury i rygorystycznego System Promptu, modele LLM mogą sporadycznie przekręcić specyficzne terminy techniczne. Wynik zawsze wymaga weryfikacji przez człowieka.
+- **Blokowanie terminala:** Skrypt działa synchronicznie. Przy dłuższych tekstach użytkownik musi czekać kilka sekund na odpowiedź zablokowanego terminala.
