@@ -1,0 +1,11 @@
+# Context dla agentów AI (np. Cursor, Copilot)
+
+1. PROJEKT: Aplikacja CLI w Pythonie do streszczania artykułów naukowych.
+2. JĘZYK: Python 3.10+. Kod piszemy używając angielskich nazw zmiennych.
+3. ARCHITEKTURA: Modułowa. Każda funkcja powinna mieć jedno zadanie (Single Responsibility Principle). Główne wejście przez `def main()`.
+4. BIBLIOTEKI: 
+   - `argparse` do CLI.
+   - `openai` do komunikacji z LLM.
+   - `python-dotenv` do zmiennych środowiskowych.
+5. COMMITY: Używamy standardu Conventional Commits (feat:, fix:, refactor:, docs:, chore:). Zawsze po angielsku.
+6. UWAGI: Kod ma być zwięzły. To jest projekt typu MVP. Nie dodawaj zbędnych, skomplikowanych frameworków bez wyraźnej prośby.
